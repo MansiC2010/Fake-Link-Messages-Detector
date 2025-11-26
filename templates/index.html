@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Fake Detection System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <a href="/logout" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <h1>AI Fake Detection</h1>
+            </div>
+            <p class="tagline">Intelligent Link & Message Verification</p>
+            {% if username %}
+            <p class="user-welcome" style="color: var(--text-secondary); font-size: 14px; margin-top: 10px;">
+                Welcome, <strong>{{ username }}</strong>!
+            </p>
+            {% endif %}
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="url">
+                    <i class="fas fa-link"></i> Check Link
+                </button>
+                <button class="tab-btn" data-tab="message">
+                    <i class="fas fa-comment-alt"></i> Check Message
+                </button>
+            </div>
+
+            <!-- URL Detection Tab -->
+            <div class="tab-content active" id="url-tab">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-link"></i> URL Detection</h2>
+                        <p>Enter any URL to check if it's fake or legitimate</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input type="text" id="url-input" placeholder="https://example.com" class="input-field">
+                            <button id="detect-url-btn" class="btn btn-primary">
+                                <i class="fas fa-search"></i> Detect
+                            </button>
+                        </div>
+                        <div id="url-result" class="result-container"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Message Detection Tab -->
+            <div class="tab-content" id="message-tab">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-comment-alt"></i> Message Detection</h2>
+                        <p>Paste a message to check if it's fake or spam</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <textarea id="message-input" placeholder="Enter message here..." class="textarea-field" rows="4"></textarea>
+                            <button id="detect-message-btn" class="btn btn-primary">
+                                <i class="fas fa-search"></i> Detect
+                            </button>
+                        </div>
+                        <div id="message-result" class="result-container"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Analytics Section -->
+        <section class="analytics-section">
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-chart-line"></i> Detection Analytics</h2>
+                    <p>Pick a dataset and visualization to explore detection performance</p>
+                </div>
+                <div class="card-body">
+                    <div class="analytics-grid">
+                        <div class="analytics-control">
+                            <label for="dataset-select">Dataset</label>
+                            <select id="dataset-select" class="select-field">
+                                <option value="fake_link">Fake Links</option>
+                                <option value="legit_link">Legitimate Links</option>
+                                <option value="fake_message">Fake Messages</option>
+                                <option value="legit_message">Legitimate Messages</option>
+                            </select>
+                        </div>
+                        <div class="analytics-control">
+                            <label for="chart-select">Chart Type</label>
+                            <select id="chart-select" class="select-field">
+                                <option value="bar">Bar Chart</option>
+                                <option value="histogram">Histogram</option>
+                                <option value="scatter">Scatter Plot</option>
+                                <option value="box">Box Plot</option>
+                                <option value="line">Line Graph</option>
+                            </select>
+                        </div>
+                        <div class="analytics-action">
+                            <button id="generate-chart-btn" class="btn btn-primary">
+                                <i class="fas fa-chart-pie"></i> Generate Graph
+                            </button>
+                        </div>
+                    </div>
+                    <div id="chart-area" class="chart-area">
+                        <p class="chart-placeholder">Select options above and click "Generate Graph" to visualize your data.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Powered by AI Machine Learning | Analyzes 36+ URL features & 31+ message features</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
